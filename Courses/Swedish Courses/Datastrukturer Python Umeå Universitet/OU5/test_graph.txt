@@ -1,0 +1,10 @@
+9
+NodA NodB
+NodC NodD
+NodB NodC
+NodE NodD
+NodE NodF
+NodF NodG
+NodG NodE
+NodH NodG
+NodI NodD

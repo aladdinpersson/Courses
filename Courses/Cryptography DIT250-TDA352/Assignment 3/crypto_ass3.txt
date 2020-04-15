@@ -1,0 +1,129 @@
+Cryptography Assignment 3 - 2019-12-10
+
+Q0: My birthday is 19970710
+
+Q1: Let v1,v2,v3,v4 be random values from the set {-1,1} and let us say
+it randomly assumes the values v1=v2=v3=v4=1. We now want that each voter
+generates their own second order polynomial with m_i(0) = v_i in {-1,1}.
+
+From my birthday as 'random' values we obtain the four polynomials:
+m1(x) = 1 - 1x + 0x^2
+m2(x) = 1 - 9x + 7x^2
+m3(x) = 1 - 9x + 1x^2
+m4(x) = 1 - 7x + 0x^2
+
+
+Q2: Each auditor separately computes the sum of the votes and returns this
+to each society member (voter). By the following functions and computations
+
+# A1,A2,A3 auditors computes the following function 
+# m_ij is what voter i sends to auditor j 
+A1(m11,m21,m31,m41) = m11 + m21 + m31 + m41
+A2(m12, m22, m32, m42) = m12 + m22 + m32 + m42
+A3(m13, m23, m33, m43) = m13 + m23 + m33 + m43
+
+# a1,a2,a3 is computed as follows
+a1 = A1(m1(1), m2(1), m3(1), m4(1)) # this is one point of the polynomial
+a2 = A2(m1(2), m2(2), m3(2), m4(2)) # another point
+a3 = A3(m1(3), m2(3), m3(3), m4(3)) # a third point, and polynomial degree 2 
+
+The explicit calculations are then:
+m1(1) = 1 - 1*1 + 0*1^2 = 0
+m2(1) = 1 - 9*1 + 7*1^2 = -1
+m3(1) = 1 - 9*1 + 1*1^2 = -7
+m4(1) = 1 - 7*1 + 0*1^2 = -6
+A1(0,-1,-7,-6) = -14
+
+m1(2) = 1 - 1*2 + 0*2^2 = -1
+m2(2) = 1 - 9*2 + 7*2^2 = 11
+m3(2) = 1 - 9*2 + 1*2^2 = -13
+m4(2) = 1 - 7*2 + 0*2^2 = -13
+A2(-1,11,-13,-13) = -1 + 11 -13 - 13 = -16
+
+m1(3) = 1 - 1*3 + 0*3^2 = -2
+m2(3) = 1 - 9*3 + 7*3^2 = 37
+m3(3) = 1 - 9*3 + 1*3^2 = -17
+m4(3) = 1 - 7*3 + 0*3^2 = -20
+A3(-2,37,-17,-20) = -2
+
+So a1 = -14, a2 = -16, a3 = -2
+
+Q3: 
+We have obtained three points for a polynomial degree 2, with lagrangian
+interpolation we can now obtain this unique polynomial F(x) which will also
+satisfy F(0) = m1(0) + m2(0) + m3(0) + m4(0). We specifically have the points that
+F(1) = -14, F(2) = -16, F(3) = -2
+
+# Lagrangian interpolation gives us these deltas
+delta1(x) = (x-2)(x-3)/ ( (2-1)(3-1) )
+delta2(x) = (x-1)(x-3)/ ( (1-2)(3-2) )
+delta3(x) = (x-1)(x-2)/ ( (1-3)(2-3) )
+
+F(x) = a1*delta1(x) + a2*delta2(x) + a3*delta3(x)
+F(1) = -14 * delta1(1) -16*delta2(1) -2*delta3(1) = -14*1 -16*0 -2*0 = -14
+F(2) = -14*0 -16*1 -2*0 = -16
+F(3) = -14*0 -16*0 -2*1 = -2
+
+# F(0) below is = 4 which is correct if add up v1+v2+v3+v4=4
+# by formula for lagrangian interpolation
+F(0) = delta1(0)*a1 + delta2(0)*a2 + delta3(0)*a3 = 3*(-14) -3*(-16) + 1*(-2) = 4
+
+Q4: If for example voter1 constructs his polynomial in a way that m1(0) is 
+not in {-1,1} and is perhaps a value of 2 then his vote will count as 2
+votes in the end result. If somehow this voter knows the total amount of
+society members there are then he could take this positive value as m1(0)
+and always ensure that the result will be positive (assuming every other
+society member is honest). But there is no restriction on m1(0) so 
+voter1 could also m1(0) -> infinity and always ensure it no matter the
+amount of members however this might result in practical issues.
+
+Q5: One idea is that we can remove voter1 and see what the result is 
+when we only have voter2,voter3, voter4 and then compare to when voter1
+is included and see that absolute value of this difference should be 1.
+
+This is impractical due to computations and can result in other complications.
+In reality we only need to know the sign, so perhaps it is possible to take the
+sign of each of m1,m2,m3,m4 of each value and then use this somehow.
+
+Part B: Crypto Protocols
+
+Task1: We have the protocol 
+1. A -> B: {A, {M}eB}eB
+2. B->  A: {M}eA
+
+Question 1,a) 
+C is a legitimate user in the system and let's say C obtains message {M}eA
+Then C can modify this message in a way so it results in {C, {M}eA}eA and send to A.
+C -> A: {C, {M}eA}eA
+A -> C {M}eC
+
+and C can now decrypt with his key dC.
+
+Question 1,b)
+We pick up {A, {M}eB}eB we can then modify it to {C, {A, {M}eB}eB}eB send it to B then
+B -> C: {A, {M}eB}eC
+
+C gets {A, {M}eB} since he can decrypt using dC then modifies it to {C, {m}eB}eB and then
+C -> B {C, {M}eB}eB then
+B -> A {M}eC which C picks up and decrypts, hence C obtains message M both if he intercepts 1) or 2).
+
+Task2:
+We have the following authenthication protocol
+1. A -> B: {A, nA}eB
+2. B -> A: [nA, nB}eA
+3. A -> B: {nB}eB
+
+Q2) This is a faulty protocol because C can make B believe is he A by the following sequence.
+Let us assume A initiates with C since C is a legitimate user in the system.
+
+A -> C: {A, nA}eC and then C has nA.
+C takes this and sends to B
+C -> B: {A, nA}eB
+B sends back to A the following
+B -> A: {nA, nB}eA
+A receives this and believes he is still talking to C and then does the following
+A -> C: {nB}eC
+C decrypts this and obtains nB and also has nA since previously.
+C -> B: {nB}eB
+
+B believes he is talking to A but is in fact communicating with C --> Unsafe.

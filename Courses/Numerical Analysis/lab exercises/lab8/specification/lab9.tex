@@ -1,0 +1,94 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry} 
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,amsthm,algorithm,algorithmic,graphicx,yhmath,url,enumitem,lscape}
+\usepackage{wrapfig,subfigure}
+
+\newcounter{problem}
+\newenvironment{problem}{\refstepcounter{problem} \noindent {\bf Problem \arabic{problem}}}{\vspace{0.5cm}}
+\newenvironment{solution}{\vspace{0.3cm} \par \noindent {\bf Solution}}{}
+\newenvironment{verification}{\vspace{0.3cm} \par \noindent {\bf Verification}}{}
+\newenvironment{hint}{\vspace{0.3cm} \par {\bf Hint:}}{}
+
+\newcounter{remark}
+\newenvironment{remark}{\refstepcounter{remark} \vspace{0.3cm} \par \noindent {\bf Remark \arabic{remark}}}{\vspace{0.3cm}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\fl}{\text{fl}}
+
+
+\title{Teknisk vetenskabliga ber{\"a}kningar, Fall 2018 \\ Lab Session 9}
+\author{Carl Christian Kjelgaard Mikkelsen}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Introduction} 
+
+This note contains the list of problems for our lab session
+\begin{center}
+Wednesday, January 9th, 2019, (kl. 13.00-16.00), Room MA416-426.
+\end{center}
+
+\section{The problems}
+
+\begin{problem} Copy the function {\tt forward.m} into {\tt work/MyForward.m}
+  \begin{enumerate}
+  \item Extend {\tt MyForward} to the point where it also returns the exact flop count in a variable {\tt count}.
+  \item Derive and verify a formula for the exact flop count.
+  \item Extend {\tt MyForward} to the point where it can solve a lower unit triangular linear system $LX=F$ where $F$ is an $m$ by $n$ matrix.
+  \item Construct a minimal working example {\tt work/MyForwardMWE.m} which verifies that {\tt MyForward} is working as advertised. For each column, the script must compute and display the normwise relative error given by
+    \bes
+    \frac{\| X(.,j) - \hat{X}(:,j) \|_\infty}{\|X(:,j)\|_\infty}
+    \ees
+    as well as the normwise relative residual given by
+     \bes
+    \frac{\| F(.,j) - L \hat{X}(:,j) \|_\infty}{\|F(:,j)\|_\infty}
+    \ees
+  \end{enumerate}
+ Naturally, large values of the normwise relative error are unfortunate, but the normwise relative residual should be small for forward substitution.
+\end{problem}
+
+\begin{problem} Copy the function {\tt backward.m} into {\tt work/MyBackward.m}
+  \begin{enumerate}
+  \item Extend {\tt MyBackward} to the point where it also returns the exact flop count in a variable {\tt count}.
+  \item Derive and verify a formula for the exact flop count.
+  \item Extend {\tt MyBackward} to the point where it can solve a non-singular upper triangular linear system $UX=F$ where $F$ is an $m$ by $n$ matrix.
+  \item Construct a minimal working example {\tt work/MyBackward MWE.m} which verifies that {\tt MyBackward} is working as advertised. For each column, the script must compute and display the normwise relative error given by
+    \bes
+    \frac{\| X(.,j) - \hat{X}(:,j) \|_\infty}{\|X(:,j)\|_\infty}
+    \ees
+    as well as the normwise relative residual given by
+     \bes
+    \frac{\| F(.,j) - U \hat{X}(:,j) \|_\infty}{\|F(:,j)\|_\infty}
+    \ees
+  \end{enumerate}
+ Naturally, large values of the normwise relative error are unfortunate, but the normwise relative residual should be small for backward substitution.
+\end{problem}
+
+\begin{problem} Copy the function {\tt factor.m} into {\tt work/MyFactor.m}
+  \begin{enumerate}
+  \item Extend {\tt MyFactor} to the point where it also returns the exact flop count in a variable {\tt count}.
+  \item Derive and verify a formula for the exact flop count\footnote{It is possible that this question and answer can be helpful: \url{http://math.stackexchange.com/questions/1640730/order-of-lu-factorisation/1641606#1641606}}.
+  \item Develop a minimal working example {\tt MyFactorMWE} which computes an LU factorization $PA=LU$ of a random matrix $A$. The script must compute and display the normwise relative residual given by
+    \bes
+    \frac{\| PA - LU\|_\infty}{\|A\|_\infty}
+    \ees
+    In exact arithmetic, this number should be zero. In floating point arithmetic, we can expect a small value, and large values will almost certainly be caused by programming errors.
+    \end{enumerate}
+    \begin{remark} {\tt MyFactor} will not return the matrix $P$ explicitly. However, the array {\tt sigma} contains the necessary information. Specifically, if $B = PA$, then MATLAB can construct $B$ using {\tt B=A(sigma,:)}.
+    \end{remark}
+\end{problem}
+
+\begin{problem} Develop a function {\tt work/MyGauss.m} which uses the functions {\tt MyFactor}, {\tt MyForward}, {\tt MyBackward} to solve a linear system $AX=F$ where $A$ is a non-singular $m$ by $m$ matrix and $F$ is an $m$ by $n$. Develop a minimal working example {\tt work/MyGaussMWE.m} which verifies that {\tt MyGauss} is working as advertised. In particular, the script must compute the normwise relative error and the normwise relative residual for each column. Large normwise relative errors are possible, but large normwise relative residuals strongly suggest programming errors.
+\end{problem}
+
+\end{document}

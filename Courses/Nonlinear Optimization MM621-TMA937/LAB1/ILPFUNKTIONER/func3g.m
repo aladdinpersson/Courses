@@ -1,0 +1,12 @@
+function df = func3g(x)
+RR = (x(1)+2).^2 + (x(2)+1).^2;
+rx1= x(1)+2;
+rx2= x(2)+1;
+ex1 = exp(-RR./10);
+ex2 = exp(-RR./100);
+fact1=4/5;
+fact2=4/50;
+df1= fact1*rx1.*ex1-fact2*rx1.*ex2+0.02*x(1)+0.05;
+df2= fact1*rx2.*ex1-fact2*rx2.*ex2+0.02*x(2)+0.02;
+df = [df1; df2];
+%z = -4*exp(-RR./10)+4*exp(-RR./100)+0.01*RR+0.01*x(1);

@@ -1,0 +1,27 @@
+reset;
+
+model example1.mod;
+
+# OPTIONAL
+option solver 'gurobi';
+option gurobi_options 'presolve 0 solnsens 1';
+
+solve;
+
+display x1,x2,x3,x4,z;
+display x1.rc, x2.rc, x3.rc, x4.rc;
+display M1.slack,M2.slack,M3.slack,M4.slack;
+display M1,M2,M3,M4;
+
+display x1.sensobjlo, x1.sensobjhi;
+display x2.sensobjlo, x2.sensobjhi;
+display x3.sensobjlo, x3.sensobjhi;
+display x4.sensobjlo, x4.sensobjhi;
+
+
+display M1.sensrhslo, M1.sensrhshi;
+display M2.sensrhslo, M2.sensrhshi;
+display M3.sensrhslo, M3.sensrhshi;
+display M4.sensrhslo, M4.sensrhshi;
+
+reset;

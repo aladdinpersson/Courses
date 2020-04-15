@@ -1,0 +1,140 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry} 
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,amsthm,algorithm,algorithmic,graphicx,yhmath,url,enumitem,lscape}
+\usepackage{wrapfig,subfigure}
+
+\newcounter{problem}
+\newenvironment{problem}{\refstepcounter{problem} \noindent {\bf Problem \arabic{problem}}}{\vspace{0.5cm}}
+\newenvironment{solution}{\vspace{0.3cm} \par \noindent {\bf Solution}}{}
+\newenvironment{verification}{\vspace{0.3cm} \par \noindent {\bf Verification}}{}
+\newenvironment{hint}{\vspace{0.3cm} \par {\bf Hint:}}{}
+
+\newcounter{remark}
+\newenvironment{remark}{\refstepcounter{remark} \vspace{0.3cm} \par \noindent {\bf Remark \arabic{remark}}}{\vspace{0.3cm}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\fl}{\text{fl}}
+
+
+\title{Teknisk vetenskabliga ber{\"a}kningar, Fall 2018 \\ Lab Session 7}
+\author{Carl Christian Kjelgaard Mikkelsen}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Introduction} 
+
+This note contains the list of problems for our lab session
+\begin{center}
+Wednesday, December 19th, (kl. 13.00-16.00), Room MA416-426.
+\end{center}
+
+\section{The problems}
+
+\begin{problem}
+  
+    \begin{enumerate} \item Copy script {\tt rode\_mwe1} in {\tt work/l7p1.m} and adapt it to solving the initial value problem
+    \bes
+    y'(t) = 1 - y(t)^2, \quad y(0) = 0
+    \ees
+    for $t \in [0,2]$.
+  \item For each value of $t$ examine Richardson's fraction. Are they behaving in a manner which is consistint with the existence of an asymptotic error expansion?
+  \item Show that $y(t) = \tanh(t)$ is the solution of this initial value problem and include this information in your script.
+  \item Is there good agreement between the error estimates and the true error?
+  \end{enumerate}
+\end{problem}  
+
+\begin{remark} The differential equation
+  \be
+  y'(t) = 1 - y(t)^2
+  \ee
+  may appear uninteresting. However, if $y$ is a solution, then $v(t) = a y(bt)$ solves the differential equation
+  \be
+  v'(t) = ab - \frac{b}{a} v(t)^2 = - g + k v(t)^2
+  \ee
+  provided $a = \sqrt{\frac{g}{k}}$ and $b = \sqrt{gk}$. This is the differential equation which corresponds to a rock falling straight down through a homogeneous atmosphere.
+\end{remark}
+
+
+\begin{problem} {\bf Implementing and testing new method}
+  \begin{enumerate}
+  \item Study the implementation of {\tt rk.m} and at least one of the dependencies, say, {\tt phi4.m} to the point were you can implement the method
+\begin{align}
+k_1 &= f(t_j,v_j)\\
+k_2 &= f(t_j + \frac{1}{2} h, v_j + \frac{1}{2} h k_1),\\
+k_3 &= f(t_j + h, v_j - h k_1 + 2 hk_2), \\
+v_{j+1} &= v_j + \frac{1}{6} h \left( k_1 + 4 k_2 + k_3\right). 
+\end{align}
+as {\tt work/psi.m}.
+\item Develop a script {\tt work/l7p2.m} which demonstrates that the global error for this method is $O(h^3)$.
+\item Compare the error estimates to the exact error for a differential equation where you know the solution. Can you trust the error estimates?
+\end{enumerate}
+
+\end{problem}
+
+\begin{problem} {\bf The connection between regular integration and solving ordinary differential equations} Consider the problem of computing the standard normal distribution function, i.e
+\be
+F(t) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^t e^{-\frac{1}{2} x^2} dx
+\ee
+\begin{enumerate}
+\item Show that $t \rightarrow F(t)$ is the unique solution of the initial value problem
+\begin{align}
+y'(t) &= f(t,y), \\
+y(0) &= \frac{1}{2},
+\end{align}
+where $f : \R \times \R \rightarrow \R$ given by
+\be
+f(t,y) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} t^2},
+\ee
+is independent of $y$. 
+\item Develop a script {\tt work/l7p3.m} which computes a table of $t \rightarrow F(t)$ for 21 equidistant points in the interval $[0,2]$. Your relative error must be less that $\tau = 10^{-7}$.
+\item This goal can be accomplished using a smallest stepsize of $h=1/640$. Which stepsize did you use?
+\end{enumerate}
+\end{problem}
+
+\begin{remark} At this point you can compute reliable error estimates. Regardless, the true solution is available in {\tt MATLAB} as {\tt sol=@(t)0.5*(1+erf(t/sqrt(2)))}, where {\tt erf} is {\tt MATLAB}'s implementation of the standard error function.
+\end{remark}
+
+\begin{problem} {\bf The SIR model of infectious diseases.} Infectious diseases such Ebola in can modelled using differential equations. In this problem we consider the standard SIR model for a epidemic from which everybody eventually recovers. It has three groups of people, susceptible (S), infected (I), and recovered (R). Susceptible people become infected at a rate which is proportional to the product of their number and the number of infected. Infected people recover at a constant rate and develop natural immunity. The corresponding system of ordinary differential equations is
+\begin{align}
+S' &= - \alpha I S, \\
+I' &=  \alpha I S - \beta I, \\
+R' &= \beta I,
+\end{align}
+where $\alpha, \beta > 0$ are constants which determine the rate of infection/rate of recovery.
+\begin{enumerate} 
+\item Implement a function {\tt work/viral.m} similar to {\tt shell4.m} which models the above system of ordinary differential equations. The call sequence must be
+\begin{verbatim}
+y=viral(t,x)
+\end{verbatim}
+where 
+\begin{enumerate}
+\item {\tt t} is a dummy variable which must be present in order for {\tt viral.m} to be compatible with the main program {\tt rk.m}.
+\item {\tt x} is a column vector, such that {\tt x(1)} is the fraction of the population which is susceptible, {\tt x(2)} is the fraction of the population which is infected, {\tt x(3)} is the fraction of the population which has recovered and is immune.
+\item {\tt y} is a column vector such that {\tt y(i)} is the time derivative of {\tt x(i)}.
+\end{enumerate}
+\item Develop a script {\tt work/l7p4.m} which simulates an epidemic for which $\alpha = 0.5 \text{ days}^{-1}$ and $\beta = 0.04 \text{ days}^{-1}$. Initially, $99 \%$ of the population is susceptible and $1 \%$ is infected. Track the disease using {\tt rk.m} for $60$ days. Verify, that more than $85 \%$ of the population has recovered by the end of the period.
+\item An outbreak is said to be contained if the number of sick people is not increasing. Show that any outbreak will be contained if and only if $S(0) < \frac{\beta}{\alpha}$.
+\item Return to example and verify that the number of infected peaked at the time $T$ where $S(T) = \frac{\beta}{\alpha}$. Verify that more than $70 \%$ of the population was ill at the time!
+\item The purpose of vaccination is ensure that outbreaks are always contained. If a fraction $z$ of the population is immune to the disease, then the model changes to 
+\begin{align}
+S' &= - \alpha I (1-z) S \\
+I' &=  \alpha I (1-z) S - \beta I \\
+R' &= \beta I
+\end{align}
+Change your implementation of {\tt viral} to contain a variable {\tt z} which specifies the fraction of the population which is immune to the disease.
+\item (Herd immunity) Show that outbreaks are always contained if and only if $S(0) < \frac{1}{1 - z}\frac{\beta}{\alpha}$.
+\item Return to the previous example, but assume that $95\%$ of the population has be vaccinated at birth and track the outbreak for $120$ days. Verify, that the disease can never threatend the fabric of society, because the sick are always so few in number that adequate care can be provide while normal functions continue.
+\end{enumerate} 
+\end{problem}
+
+\end{document}

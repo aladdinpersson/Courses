@@ -1,0 +1,30 @@
+Vitamin eller mineral	Dagligt referensintag
+som används vid
+märkning av livsmedel
+Vitamin A mikrogram 	800
+Vitamin D mikrogram 	5
+Vitamin E milligram 	12 
+Vitamin K mikrogram 	75
+Vitamin C milligram 	80 
+Tiamin milligram 	1,1
+Riboflavin milligram 	1,4 
+Niacin milligram 	16 
+Vitamin B6 milligram 	1,4 
+Folsyra mikrogram 	200
+Vitamin B12 mikrogram 	 2,5
+Biotin mikrogram 	50
+Pantotensyra milligram 	6
+Kalium milligram 	2000 
+Klorid milligram  	800 
+Kalcium milligram 	800 
+Fosfor milligram 	700
+Järn milligram  	14 
+Magnesium milligram  	375 
+Zink milligram  	10 
+Koppar milligram  	1
+Mangan milligram  	2 
+Fluorid milligram  	3,5 
+Selen mikrogram  	55 
+Krom mikrogram 	40 
+Molybden mikrogram 	50 
+Jod mikrogram 	150

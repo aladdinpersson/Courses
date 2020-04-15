@@ -1,0 +1,47 @@
+Q1:
+
+We can have that the first 7 byte blocks can be any value that a byte can represent. One byte is 8 bits, and since 8 bits can represent a maximum value of
+2^8 + 2^7 + ... + 2^0 = 255, we therefore have that 1 byte can be in an interval from 0-255 and is a total of 256 integers. Since the first 7 bytes can be
+any value, and the 8th byte is specified then we have: 256^7 * 1 cases. Total possible cases is 256^8, so the probability that a random block is a pad block
+of type 0 is: 1/256 (this specific case / total possible).
+
+Q2:
+
+The specific case is that it can be any of the 8 valid pad blocks and total is the same we get get
+(256^7 + 256^6 + 256^5 + ... + 256^0) / (256^8) = [Divide we obtain a geometric sum] = 1/255
+
+Q3:
+We want to calculate P("Random Block of type 0" | "Valid pad block") = P("Valid pad block" | "Random Block of type 0") * P("Random Block of type 0") / P("Valid Pad Block")
+
+Both of these are calculated in Q1, Q2 respectively. P("Random Block of type 0") = 1/256, P("Valid pad block") = 1/255, plugging htese values in the formula above we obtain
+P("Random Block of type 0" | "Valid pad block") = 255/256 ~ 99.6%
+
+Q4:
+D(C) + (R_i + C'), where C = E(P + C'), this gives 
+
+D(E(P + C')) + (R_i + C') = P + C' + (R_i + C') = P + R_i + C' + C' = P + R_i + 0 = P + R_i
+
+Q5:
+We want to make the last byte to a 0 since this makes it into a block of type 0 which was found in Q3 to be the padding in 99.6% of cases. 
+In the xor operation it will only become 0 if they are of the same type and then we will get that P = i --> It is a pad of type 0.
+
+Q6: 
+My thought is that the MAC computation is not slow because the message is very short (only 2 blocks long). What we want is to increase the length of the message
+and we could do this by adding blocks of random text in the beginning, and this won't affect the ending of the message which is where the padding is sent.
+
+Q7:
+We will do the calculation i + b7 and it should be equal to 1 (which we can check with the timing difference of checking MAC vs padding).
+
+i + b7 = 1 --> i + b7 + i = 1 + i --> b7 = 1 + i
+
+Q8: 
+Similarly to Q7 now we move on to a valid pad block of type 2, and since we know b8 for example, we can send for the last byte: b8 + 2.
+Then this will decrypt to b8 + b8 + 2 = 2. We can similar to the second to last byte since we have calculated b7 and we get b7 + b7 + 2 = 2
+
+We will do the calculation i + b7 = 2 --> b7 = 2 + i.
+
+This might be sloppy notation that I am using here but i and b7 is a 8-bit number and I mean here and same in Q7 that 2 should be represented
+in 8 bits.
+
+Q9: 
+I didn't come up with any good idea here, but please respond with some idea on this one since I would like to know how.

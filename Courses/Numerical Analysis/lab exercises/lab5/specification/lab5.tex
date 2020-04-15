@@ -1,0 +1,113 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry} 
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,amsthm,algorithm,algorithmic,graphicx,yhmath,url,enumitem,lscape,mathtools}
+\usepackage{wrapfig,subfigure}
+
+\newcounter{problem}
+\newenvironment{problem}{\refstepcounter{problem} \noindent {\bf Problem \arabic{problem}}}{\newpage}
+\newenvironment{solution}{\vspace{0.3cm} \par \noindent {\bf Solution}}{}
+\newenvironment{verification}{\vspace{0.3cm} \par \noindent {\bf Verification}}{}
+\newenvironment{hint}{\vspace{0.3cm} \par {\bf Hint:}}{}
+
+\newcounter{remark}
+\newenvironment{remark}{\refstepcounter{remark} \vspace{0.3cm} \par \noindent {\bf Remark \arabic{remark}}}{\vspace{0.3cm}}
+\newcounter{lesson}
+\newenvironment{lesson}{\refstepcounter{lesson} \vspace{0.3cm} \par \noindent {\bf Lesson \arabic{lesson}}}{\vspace{0.3cm}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\fl}{\text{fl}}
+
+\begin{document}
+
+\title{5DV005, Fall 2018, Lab session 5}
+\author{Carl Christian Kjelgaard Mikkelsen}
+
+\maketitle
+\tableofcontents
+
+\section{The time and the place}
+The lab session will take place on
+\begin{center}
+Wednesday, December 5th, 2018, (kl. 13.00-16.00), Room MA416-426.
+\end{center}
+
+
+\section{Introduction}
+
+This week's problems do not require much in terms of programming. However, however careful inspection and analysis of the output is required. Use any excess time to complete problems from previous weeks.
+
+\section{The problems}
+
+\begin{problem} Consider the problem of computing the derivative $f'(x)$ using the finite difference approximation
+  \bes
+  D_1(f,x,h) = \frac{f(x+h)-f(x)}{h}
+  \ees
+  Execute the script {\tt rdifmwe1} and examine output in detail:
+  \begin{enumerate}
+  \item Determine the value of $k$ where the computed value of Richardson's fraction has executed an illegal jump.
+  \item Determine the range of $k$ values for which the computed value of Richardson's fraction convergences monotonically to $2^p$ for a suitable value of $p$.
+  \item Determine the range of $k$ values for which the computed value of Richardson's fraction converges to $2^p$ at the correct rate.
+  \item Determine the range of $k$ values where the error estimates become more and more accurate.
+  \item How is the behavior of Richardson's fraction related to the quality of Richardson's error estimate?
+    \end{enumerate}
+  \end{problem}
+
+  \begin{problem} Copy {\tt rdifmwe1.m} into {\tt /work/l5p2.m} and adapt it to the problem of computing $f'(2)$ where
+    \bes
+    f(x) = e^x \sin(x)
+    \ees
+    Do \textit{not} include the derivative when you call {\tt rdif}.
+    \begin{enumerate}
+    \item Verify that the computed value of Richardson's fraction appears to converge towards $2^p$ for a suitable value of $p$ as $h$ tends to zero. 
+    \item Find the last value of $k$, where the computed value of Richardson's fraction behaved exactly as predicted for the exact value of Richardson's fraction.
+    \item Include the exact derivative when you call {\tt rdif}. Find the value of $k$ where the accuracy of Richardson's error estimate is maximal.
+    \item How is the behavior of Richardson's fraction related to the quality of Richardson's error estimate?
+      \end{enumerate}
+ \end{problem}
+   
+\begin{problem} Consider the problem of computing the derivative $f'(x)$ using the finite difference approximation
+  \bes
+  D_2(f,x,h) = \frac{f(x+h)-f(x-h)}{2h}
+  \ees
+  Execute the script {\tt rdifmwe2} and examine output in detail:
+  \begin{enumerate}
+  \item Determine the value of $k$ where the computed value of Richardson's fraction has executed an illegal jump.
+  \item Determine the range of $k$ values for which the computed value of Richardson's fraction convergences monotonically to $2^p$ for a suitable value of $p$.
+  \item Determine the range of $k$ values for which the computed value of RichRichardson's fraction converges to $2^p$ at the correct rate.
+  \item Determine the range of $k$ values where the error estimates become more and more accurate.
+  \item Is the behavior of Richardson's fraction related to the quality of Richardson's error estimate?
+    \end{enumerate}
+\end{problem}
+
+ \begin{problem} Copy {\tt rdifmwe2.m} into {\tt /work/l5p4.m} and adapt it to the problem of computing $f'(2)$ where
+    \bes
+    f(x) = e^x \sin(x).
+    \ees
+    Do \textit{not} include the derivative when you call {\tt rdif} initially.
+    \begin{enumerate}
+    \item Verify that the computed value of Richardson's fraction appears to converge towards $2^p$ for a suitable value of $p$ as $h$ tends to zero. 
+    \item Find the last value of $k$, where the computed value of Richardson's fraction behaved exactly as predicted for the exact value of Richardson's fraction.
+    \item Include the exact derivative when you call {\tt rdif}. Find the value of $k$ where the accuracy of Richardson's error estimate is maximal.
+    \item Is the behavior of Richardson's fraction related to the quality of Richardson's error estimate?
+    \end{enumerate}
+ \end{problem}
+
+\bibliographystyle{plain}
+  \bibliography{../../../lecture-notes/refs}
+  
+\end{document}
+
+
+
+
+
+

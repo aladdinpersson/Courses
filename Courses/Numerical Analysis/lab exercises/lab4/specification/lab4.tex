@@ -1,0 +1,106 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry} 
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,amsthm,algorithm,algorithmic,graphicx,yhmath,url,enumitem,lscape,mathtools}
+\usepackage{wrapfig,subfigure}
+
+\newcounter{problem}
+\newenvironment{problem}{\refstepcounter{problem} \noindent {\bf Problem \arabic{problem}}}{\newpage}
+\newenvironment{solution}{\vspace{0.3cm} \par \noindent {\bf Solution}}{}
+\newenvironment{verification}{\vspace{0.3cm} \par \noindent {\bf Verification}}{}
+\newenvironment{hint}{\vspace{0.3cm} \par {\bf Hint:}}{}
+
+\newcounter{remark}
+\newenvironment{remark}{\refstepcounter{remark} \vspace{0.3cm} \par \noindent {\bf Remark \arabic{remark}}}{\vspace{0.3cm}}
+\newcounter{lesson}
+\newenvironment{lesson}{\refstepcounter{lesson} \vspace{0.3cm} \par \noindent {\bf Lesson \arabic{lesson}}}{\vspace{0.3cm}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\fl}{\text{fl}}
+
+\begin{document}
+
+\title{5DV005, Fall 2018, Lab session 4}
+\author{Carl Christian Kjelgaard Mikkelsen}
+
+\maketitle
+\tableofcontents
+
+\section{The time and the place}
+The lab session will take place on
+\begin{center}
+Wednesday, November 28th, 2018, (kl. 13.00-16.00), Room MA416-426.
+\end{center}
+
+\section{The problems}
+
+\begin{center}
+  {\bf It is a smashing idea to check the folder {\tt lab4/scripts} carefully!}
+\end{center}
+
+\begin{problem}
+  \begin{enumerate}
+  \item Develop a function {\tt MySinh} which computes the function
+    \bes
+    f(x) = \frac{e^x - e^{-x}}{2}.
+    \ees
+    You may use the built-in function {\tt exp} to evaluate $e^x$ when $|x|$ is sufficiently large, but you must rewrite $f$ to avoid the subtractive cancellation at when $x \approx 0$.
+  \item Develop a minimal working example {\tt MySinhMWE} which compares your implementation to the built-in function {\tt sinh}. It is possible to reduce the relative error below $10^{-15}$ on the interval $[-3,3]$.
+  \end{enumerate}
+\end{problem}
+
+\begin{problem}
+% Newton's method for square root with good initial guess
+% MyNSqrt
+  \begin{enumerate}
+    \item Develop a function {\tt MyNewtonSqrt} which uses Newton's method for computing square roots subject. Your function must use the initial guess
+    \bes
+    x_0(s) = \frac{1}{3} s  + \frac{17}{24}
+    \ees
+    for $\sqrt{s}$ when $s \in [1,4]$.
+  \item Develop a minimal working example {\tt MyNewtonSqrtMWE1} which compares your implementation to the built in function {\tt sqrt}. It is possible to reduce the relative error to $2u$ on the interval $[10^{-3}, 10^3]$.
+  \end{enumerate}
+\end{problem}
+
+\begin{problem}
+  \begin{enumerate}
+  \item  Develop a function {\tt MyLog} which uses Newton's method to solve the non-linear equation $f(x) = 0$ where $f(x) = \exp(x) - \alpha$ and $\alpha > 0$. Your function must exploit the fact that if $\alpha = f \cdot 2^e$, then
+  \bes
+  \log(\alpha) = \log(f) + e \log(2)
+  \ees 
+ Your are free to use the special function {\tt log2} to determine $f$ and $e$. You are free to use the built-in value of $\log(2)$. Your function must use the initial guess
+  \bes
+  x_0(s) = a s + b, \qquad a = \log(2), \qquad b = - \frac{a + \log(a) + 1}{2}
+  \ees
+  for $\log(s)$ when $s \in [1,2]$.
+\item Develop a minimal working example {\tt MyLogMWE} which compares your implementation to the built-in function {\tt log}. It is possible to reduce the relative error below $2u$ on the interval $[2,10]$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+% Develop a robust version of the secant method and the bisection method
+% MyRobustSecant
+  \begin{enumerate}
+  \item Copy the script {\tt scripts/l4p4.m} into the function {\tt work/MyRobustSecant.m} and complete the function according to the specification.
+  \item Develop a minimal working example {\tt MyRobustSecantMWE} which solves the your favorite non-linear equation. I recommend computing a firing solution.
+    \end{enumerate}
+\end{problem}
+
+\bibliographystyle{plain}
+  \bibliography{../../../lecture-notes/refs}
+  
+\end{document}
+
+
+
+
+
+

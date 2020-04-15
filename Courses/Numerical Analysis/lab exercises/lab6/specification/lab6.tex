@@ -1,0 +1,153 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry} 
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,amsthm,algorithm,algorithmic,graphicx,yhmath,url,enumitem,lscape,mathtools}
+\usepackage{wrapfig,subfigure}
+
+\newcounter{problem}
+\newenvironment{problem}{\refstepcounter{problem} \noindent {\bf Problem \arabic{problem}}}{\newpage}
+\newenvironment{solution}{\vspace{0.3cm} \par \noindent {\bf Solution}}{}
+\newenvironment{verification}{\vspace{0.3cm} \par \noindent {\bf Verification}}{}
+\newenvironment{hint}{\vspace{0.3cm} \par {\bf Hint:}}{}
+
+\newcounter{remark}
+\newenvironment{remark}{\refstepcounter{remark} \vspace{0.3cm} \par \noindent {\bf Remark \arabic{remark}}}{\vspace{0.3cm}}
+\newcounter{lesson}
+\newenvironment{lesson}{\refstepcounter{lesson} \vspace{0.3cm} \par \noindent {\bf Lesson \arabic{lesson}}}{\vspace{0.3cm}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\fl}{\text{fl}}
+
+\begin{document}
+
+\title{5DV005, Fall 2018, Lab session 6}
+\author{Carl Christian Kjelgaard Mikkelsen}
+
+\maketitle
+\tableofcontents
+
+\section{The time and the place}
+The lab session will take place on
+\begin{center}
+Wednesday, December 12th, 2018, (kl. 13.00-16.00), Room MA416-426.
+\end{center}
+
+
+\section{The problems}
+
+\begin{problem} Copy {\tt rintmwe1} into {\tt /lab6/work/l6p1.m} and adapt it to the problem of computing the integral
+  \bes
+  \int_0^{\pi} \exp(x)\sin(x)dx
+  \ees
+  numerically using the trapezoidal rule.
+ 
+    \begin{enumerate}
+      \item What evidence do you find to support support the conjecture that there exist
+        an asymptotic error expansion of the form
+        \bes
+        T- A_h = \alpha h^p + \beta h^q + O(h^r), \quad 0 < p < q < r.
+        \ees
+      \item Based on the numerical evidence, what is a reasonable value of $p$?
+      \item Based on the numerical evidence, what is a reasonable value of $q$?
+      \item What is the smallest value of $k$ for which the integral can be computed with a relative error less than $\tau = 10^{-6}$?
+        \begin{center} {\bf You must explain why your error estimate is reliable!}
+        \end{center}
+      \item Compute the exact value of the integral and include this information in {\tt l6p1}.
+      \item Is the behavior of Richardson's fraction related to the quality of Richardson's error estimate?
+   \end{enumerate}
+  \end{problem}
+
+  
+  
+  \begin{problem} Copy {\tt rintmwe1.m} into {\tt /work/l6p2.m} and adapt it to the problem of computing the integral
+    \bes
+    T = \int_{-1}^1 \sqrt{1-x^2} dx
+    \ees
+    using the trapezoidal rule as your approximation $A_h$.
+    \begin{enumerate}
+      \item What evidence do you find to support support the conjecture that there exist
+        an asymptotic error expansion of the form
+        \bes
+        T- A_h = \alpha h^p + \beta h^q + O(h^r), \quad 0 < p < q < r.
+        \ees
+      \item Based on the numerical evidence, what is a reasonable value of $p$?
+      \item Based on the numerical evidence, what is a reasonable value of $q$?
+      \item What is the smallest value of $k$ for which the integral can be computed with a relative error less than $\tau = 10^{-6}$?
+        \begin{center} {\bf You must explain why your error estimate is reliable}
+        \end{center}
+      \item Compute the exact value of the integral and include this information in {\tt l6p2}. {\bf Hint:} It is quite easy to compute the integral if you make a drawing of the graph first.
+      \item Is the behavior of Richardson's fraction related to the quality of Richardson's error estimate?
+      \end{enumerate}
+ \end{problem}
+
+
+  \begin{problem} Copy {\tt rintmwe1.m} into {\tt /work/l6p3.m} and adapt it to the problem of computing the integral
+    \bes
+    T = \frac{1}{\sqrt{\pi}}\int_0^3 \exp(-x^2) dx
+    \ees
+    using the trapezoidal rule as your approximation $A_h$.
+    \begin{enumerate}
+      \item What evidence do you find to support support the conjecture that there exist
+        an asymptotic error expansion of the form
+        \bes
+        T- A_h = \alpha h^p + \beta h^q + O(h^r), \quad 0 < p < q < r.
+        \ees
+      \item Based on the numerical evidence, what is a reasonable value of $p$?
+      \item Based on the numerical evidence, what is a reasonable value of $q$?
+      \item Why is Richardson's fraction not close to $2^p$ for small values of $k$?
+        \item Why is Richardson's fraction not close to $2^p$ for very large values of $k$?.
+      \item What is the smallest value of $k$ for which the integral can be computed with a relative error less than $\tau = 10^{-6}$?
+        \begin{center} {\bf You must explain why your error estimate is reliable!}
+        \end{center}       
+      \end{enumerate}
+ \end{problem}
+
+
+
+\begin{problem} Copy {\tt rdifmwe1} into {\tt /work/l6p4.m} and adapt it to the problem of computing the the target $T = f'(x)$,  where $f$ is you favorite differentiable function and $x$ is your favorite real number using the mysterious rule
+    \bes
+    M_h = A_h + \frac{A_h - A_{2h}}{2^p-1}
+    \ees
+    where $A_h$ is your favorite rule for computing $f'(x)$ which obeys an asymptotic error expansion of the form
+    \bes
+     T- A_h = \alpha h^p + \beta h^q + O(h^r), \quad 0 < p < q < r.
+     \ees
+     \begin{enumerate}
+     \item What evidence can you uncover that suggests that $M_h$ obeys an asymptotic error expansion of the form
+       \be
+       T - M_h = \bar{\alpha} h^q + \bar{\beta} h^r + O(h^s), \quad 0 < q < r < s.
+       \ee
+     \item Based on your numerical evidence, what is a reasonable value of $q$?
+     \item Based on your numerical evidence, what is a reasonable value of $r$?
+     \item Include the exact value of the derivative of $f$ in the script.
+       \item Examine the relationship between Richardson's fraction and the quality of the error estimate.
+     \end{enumerate}
+ \end{problem}
+
+ \section{Concluding remarks}
+ \begin{enumerate}
+ \item You will find that quality of the error estimate improves even after the computed value of Richardson's fractions have start to deviate from the expected pattern. This happens from time to time, but it is not something you can count on.
+ \item If you return an approximation without an error estimate or an error bound, then you work is incomplete.
+   \item If you return an error bound or an error estimate without explaining why it is reliable, then your work is incomplete.
+ \end{enumerate}
+  
+
+ 
+\bibliographystyle{plain}
+  \bibliography{../../../lecture-notes/refs}
+  
+\end{document}
+
+
+
+
+
+

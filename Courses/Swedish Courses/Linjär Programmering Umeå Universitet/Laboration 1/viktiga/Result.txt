@@ -1,0 +1,14 @@
+(108) Mjölkpulver fett 1% :	 21.1804
+(529) Nyponsoppa pulver berik :	 18.3105
+(593) Vällingpulver majs berik :	 16.7276
+(1012) Gelatinblad gelatinpulver :	 59.7111
+(1302) Jordnötter rostade saltade :	 60.6489
+(1308) Paranötter :	 0.0102
+(1325) Popcorn mikro fett 22% :	 37.3238
+(1547) Mjölkchoklad m hackade hasselnötter Schweizernöt :	 43.8408
+(1583) Måltidsersättning chokladsmak pulver Nutrilett Intensiv :	 78.1750
+(1590) Sorbitol m sackarin :	 211.1106
+(1660) Joderat salt :	 0.5558
+(1784) Rapsolja :	 29.1502
+
+Totalt intag:     576.7449
