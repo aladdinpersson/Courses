@@ -1,0 +1,8 @@
+For ISIC-Dataset:
+1. First put dataset in Data/ into folders Descriptions for labels and Images.
+2. Run utils/resize_image to resize all to ~64x64 images
+3. Run import_data/getData which will run the script getDataTarget that obtains 
+a single example
+.
+.
+.

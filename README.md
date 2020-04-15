@@ -7,6 +7,7 @@ For some of the courses I've taken either from school or MOOCs from Coursera the
 * [Introductory Machine Learning FYD600](https://github.com/AladdinPerzon/Courses/tree/master/Courses/Introductory%20Machine%20Learning%20FYD600)
 * [Nonlinear Optimization MMG621/TMA937](https://github.com/AladdinPerzon/Courses/tree/master/Courses/Nonlinear%20Optimization%20MM621-TMA937)
 * [Numerical Analysis](https://github.com/AladdinPerzon/Courses/tree/master/Courses/Numerical%20Analysis)
+* [Bachelor Thesis]()
 * [Swedish Courses](https://github.com/AladdinPerzon/Courses/tree/master/Courses/Swedish%20Courses)
 
 ## MOOCs 
