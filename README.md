@@ -3,6 +3,7 @@ Online courses and stuff I've done at school
 
 ## MOOCs 
 * [Deeplearning Specialization](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/Deeplearning-specialization)
+* [GAN Specialization](https://github.com/aladdinpersson/Courses/tree/master/MOOCS/GAN_Specialization)
 * [Machine Learning](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/Coursera-Machine-Learning)
 * [CS231n 2019](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/CS231-2019)
 * [CS224n 2019](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/Cs224n_2019) **- A5 is not done**
