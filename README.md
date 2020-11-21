@@ -1,8 +1,8 @@
 # Courses
-Online courses and stuff I've done at school
+MOOCs and other random stuff related to courses
 
 ## MOOCs 
-* [Deeplearning Specialization](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/Deeplearning-specialization)
+* [Deeplearning Specialization](https://github.com/aladdinpersson/Courses/tree/master/MOOCS/Deeplearing_Specialization)
 * [GAN Specialization](https://github.com/aladdinpersson/Courses/tree/master/MOOCS/GAN_Specialization)
 * [Machine Learning](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/Coursera-Machine-Learning)
 * [CS231n 2019](https://github.com/AladdinPerzon/Courses/tree/master/MOOCS/CS231-2019)
